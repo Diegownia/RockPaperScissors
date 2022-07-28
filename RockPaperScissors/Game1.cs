@@ -6,33 +6,39 @@ namespace RockPaperScissors
 {
     public class Game1 : IGame1
     {
-        private double _score = 0;
-        private int _wins;
-        private int _draws;
-        private int _loses;
-        private readonly IScoreCalculator _scoreCalculator;
+        private IDrawer _drawer;
+        private IDataService _dataService;
 
-        public Game1(IScoreCalculator scoreCalculator)
+        public Game1(IDrawer drawer, IDataService dataService)
         {
-            _scoreCalculator = scoreCalculator;
+            _drawer = drawer;
+            _dataService = dataService;
+        }
+        public void RockPaperScissorsGame()
+        {
+            Console.WriteLine("Welcome to the game of Rock Paper Scissors: ");
+            Console.WriteLine();
+            Console.WriteLine();
+            _drawer.DrawRockPaperScissors();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Before you begin please pick th difficulty");
+            Console.WriteLine("For [e]asy - press 'e'");
+            Console.WriteLine("For [n]ormal - press 'n'");
+            Console.WriteLine("For [h]ard - press 'h'");
+            DiffPicker();
+
+            
         }
 
-        public double Score
+
+        private void DiffPicker()
         {
-            get => _score;
-            set
-            {
-                _score = _scoreCalculator.CountScore(_wins, _loses);
-            }
+            var pick = Console.ReadKey();
+            bool result = char.TryParse(pick.KeyChar.ToString(), out char picked);
+            _dataService.SetDifficulty(picked);
+
         }
 
-        public int 
-    }
-
-    enum Moves
-    {
-        Rock = 0,
-        Paper = 1,
-        Scissors = 2
     }
 }

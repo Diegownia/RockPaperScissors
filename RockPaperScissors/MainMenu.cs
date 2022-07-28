@@ -29,7 +29,9 @@ namespace RockPaperScissors
             switch (picked)
             {
                 case 1:
+                    Console.WriteLine();
                     Console.WriteLine("You've picked Rock Paper Scissors! Enjoy");
+                    _game1.RockPaperScissorsGame();
 
                     break;
 
