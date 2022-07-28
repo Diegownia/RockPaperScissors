@@ -2,7 +2,7 @@
 
 namespace Games.Data.Core
 {
-    public class RockPaperScissorsModel
+    public class RockPaperScissorsModel : IRockPaperScissorsModel
     {
         public double Score { get; set; }
         public int Loses { get; set; }

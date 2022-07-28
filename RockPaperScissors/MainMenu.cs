@@ -23,6 +23,7 @@ namespace RockPaperScissors
             if (result == false)
             {
                 Console.WriteLine("Wrong selection ");
+                Console.Clear();
                 return;
             };
 
@@ -32,6 +33,8 @@ namespace RockPaperScissors
                     Console.WriteLine();
                     Console.WriteLine("You've picked Rock Paper Scissors! Enjoy");
                     _game1.RockPaperScissorsGame();
+                    Console.Clear();
+                    Console.WriteLine("Hope the game was fun");
 
                     break;
 

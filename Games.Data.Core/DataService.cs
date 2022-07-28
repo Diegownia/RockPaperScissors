@@ -4,12 +4,15 @@ using System.Text;
 
 namespace Games.Data.Core
 {
-    public class DataService
+    public class DataService : IDataService
     {
         private IRockPaperScissorsModel _rockPaperScissorsModel;
-        public DataService(IRockPaperScissorsModel rockPaperScissorsModel)
+        private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
+        public DataService(IRockPaperScissorsModel rockPaperScissorsModel,
+            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic)
         {
             _rockPaperScissorsModel = rockPaperScissorsModel;
+            _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
         }
         public void SetDifficulty(char diffinput)
         {
@@ -27,6 +30,23 @@ namespace Games.Data.Core
             {
                 _rockPaperScissorsModel.WinsValue = 0.5;
                 _rockPaperScissorsModel.LosesValue = 1.5;
+            }
+        }
+
+        public void PickInterpreter(string selection)
+        {
+            Random pcMove = new Random();
+            switch (selection)
+            {
+                case "r":
+                    _rockPaperScissorsDeepLogic.MoveCompare((Moves)pcMove.Next(3), Moves.Rock);
+                    break;
+                case "p":
+                    _rockPaperScissorsDeepLogic.MoveCompare((Moves)pcMove.Next(3), Moves.Paper);
+                    break;
+                case "s":
+                    _rockPaperScissorsDeepLogic.MoveCompare((Moves)pcMove.Next(3), Moves.Scissors);
+                    break;
             }
         }
     }

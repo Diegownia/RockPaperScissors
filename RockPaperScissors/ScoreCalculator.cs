@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Games.Data.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,8 +14,6 @@ namespace RockPaperScissors
             _rockPaperScissorsModel = rockPaperScissorsModel;
         }
 
-        public double LosesValue { get; set; }
-        public double WinsValue { get; set; }
         public double CountScore(int wins, int loses)
         {
             var score = (wins * _rockPaperScissorsModel.WinsValue) - 
