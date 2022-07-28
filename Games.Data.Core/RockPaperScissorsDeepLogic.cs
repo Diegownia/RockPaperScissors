@@ -17,7 +17,6 @@ namespace Games.Data.Core
                 case (Moves.Scissors, Moves.Rock):
                     OutcomeEvent.Invoke(this, new OutcomeEventArgs(Outcomes.Win));
                     break;
-
                 case (Moves.Paper, Moves.Rock):
                 case (Moves.Scissors, Moves.Paper):
                 case (Moves.Rock, Moves.Scissors):

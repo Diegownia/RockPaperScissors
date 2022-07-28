@@ -8,12 +8,38 @@ namespace Games.Data.Core
     {
         private IRockPaperScissorsModel _rockPaperScissorsModel;
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
+        private IScoreCalculator _scoreCalculator;
         public DataService(IRockPaperScissorsModel rockPaperScissorsModel,
-            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic)
+            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic, IScoreCalculator scoreCalculator)
         {
             _rockPaperScissorsModel = rockPaperScissorsModel;
             _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
+            _scoreCalculator = scoreCalculator;
+            _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
         }
+
+        private void OnOutcomeEvent(object sender, OutcomeEventArgs e)
+        {
+            if (e.Outcome == Outcomes.Win)
+            {
+                _rockPaperScissorsModel.Wins++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+            if (e.Outcome == Outcomes.Lose)
+            {
+                _rockPaperScissorsModel.Loses++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+            if (e.Outcome == Outcomes.Draw)
+            {
+                _rockPaperScissorsModel.Draws++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+        }
+
         public void SetDifficulty(char diffinput)
         {
             if (diffinput == 'e')
@@ -49,5 +75,6 @@ namespace Games.Data.Core
                     break;
             }
         }
+
     }
 }

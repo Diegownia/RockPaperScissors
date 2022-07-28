@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace RockPaperScissors
 {
@@ -10,13 +11,16 @@ namespace RockPaperScissors
         private IDrawer _drawer;
         private IDataService _dataService;
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
+        private IRockPaperScissorsModel _rockPaperScissorsModel;
 
         public Game1(IDrawer drawer, IDataService dataService, 
-            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic)
+            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic,
+            IRockPaperScissorsModel rockPaperScissorsModel)
         {
             _drawer = drawer;
             _dataService = dataService;
             _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
+            _rockPaperScissorsModel = rockPaperScissorsModel;
             _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
 
         }
@@ -67,12 +71,22 @@ namespace RockPaperScissors
         {
             while (true)
             {
-                //Console.Clear();
+                Thread.Sleep(500);
+                Console.Clear();
+                Console.WriteLine("Current score: ");
+                Console.WriteLine($"Wins: {_rockPaperScissorsModel.Wins}");
+                Console.WriteLine($"Loses: {_rockPaperScissorsModel.Loses}");
+                Console.WriteLine($"Draws: {_rockPaperScissorsModel.Draws}");
+                Console.WriteLine($"Score: {_rockPaperScissorsModel.Score}");
                 Console.WriteLine("To select move press correspondiong letter: ");
                 Console.WriteLine("For [paper] - press 'p' ");
                 Console.WriteLine("For [scissors] - press 's' ");
                 Console.WriteLine("For [rock] - press 'r' ");
-                var selection = Console.ReadLine();
+                var selection = Console.ReadLine().ToLower();
+                if (selection == "q")
+                {
+                    break;
+                }
                 _dataService.PickInterpreter(selection);
 
             }

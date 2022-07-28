@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RockPaperScissors
+namespace Games.Data.Core
 {
     public class ScoreCalculator : IScoreCalculator
     {
@@ -14,11 +14,10 @@ namespace RockPaperScissors
             _rockPaperScissorsModel = rockPaperScissorsModel;
         }
 
-        public double CountScore(int wins, int loses)
+        public void CountScore(int wins, int loses)
         {
-            var score = (wins * _rockPaperScissorsModel.WinsValue) - 
+            _rockPaperScissorsModel.Score = (wins * _rockPaperScissorsModel.WinsValue) - 
                 (loses * _rockPaperScissorsModel.LosesValue);
-            return score;
         }
     }
 }
