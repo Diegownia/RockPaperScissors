@@ -9,13 +9,30 @@ namespace Games.Data.Core
         private IRockPaperScissorsModel _rockPaperScissorsModel;
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
         private IScoreCalculator _scoreCalculator;
+        private IDiceGameModel _diceGameModel;
+
         public DataService(IRockPaperScissorsModel rockPaperScissorsModel,
-            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic, IScoreCalculator scoreCalculator)
+            IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic, 
+            IScoreCalculator scoreCalculator, IDiceGameModel diceGameModel)
         {
             _rockPaperScissorsModel = rockPaperScissorsModel;
             _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
             _scoreCalculator = scoreCalculator;
+            _diceGameModel = diceGameModel;
             _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
+        }
+
+        public int IntInputHandler()
+        {
+            var pick = Console.ReadLine();
+            int input;
+            bool checker = int.TryParse(pick, out input);
+            if (checker == false)
+            {
+                IntInputHandler();
+            }
+            return input;
+
         }
 
         private void OnOutcomeEvent(object sender, OutcomeEventArgs e)
@@ -74,6 +91,11 @@ namespace Games.Data.Core
                     _rockPaperScissorsDeepLogic.MoveCompare((Moves)pcMove.Next(3), Moves.Scissors);
                     break;
             }
+        }
+
+        public void RoundSetter(int numberofrounds)
+        {
+            numberofrounds = _diceGameModel.Rounds;
         }
 
     }

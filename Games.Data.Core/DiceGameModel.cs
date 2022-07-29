@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Games.Data.Core
 {
-    public class DiceGameModel
+    public class DiceGameModel : IDiceGameModel
     {
         public int PlayerScore { get; set; }
         public int PcScore { get; set; }
+        public int Rounds { get; set; }
+
     }
 }

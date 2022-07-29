@@ -38,7 +38,7 @@ namespace CoreGame
             _drawer.DrawRockPaperScissors();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("Before you begin please pick th difficulty");
+            Console.WriteLine("Before you begin please pick the difficulty");
             Console.WriteLine("For [e]asy - press 'e'");
             Console.WriteLine("For [n]ormal - press 'n'");
             Console.WriteLine("For [h]ard - press 'h'");
