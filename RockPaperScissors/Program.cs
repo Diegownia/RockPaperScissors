@@ -2,7 +2,7 @@
 using Autofac;
 using Games.Data.Core;
 
-namespace RockPaperScissors
+namespace CoreGame
 {
     class Program
     {

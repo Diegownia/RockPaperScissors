@@ -1,4 +1,4 @@
-﻿namespace RockPaperScissors
+﻿namespace CoreGame
 {
     public interface IGame1
     {

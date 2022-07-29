@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RockPaperScissors
+namespace CoreGame
 {
     public class Drawer : IDrawer
     {
