@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Games.Data.Core
 {
-    public class DataService : IDataService
+    public class GameManager : IGameManager
     {
         private IRockPaperScissorsModel _rockPaperScissorsModel;
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
         private IScoreCalculator _scoreCalculator;
         private IDiceGameModel _diceGameModel;
 
-        public DataService(IRockPaperScissorsModel rockPaperScissorsModel,
+        public GameManager(IRockPaperScissorsModel rockPaperScissorsModel,
             IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic, 
             IScoreCalculator scoreCalculator, IDiceGameModel diceGameModel)
         {
@@ -22,17 +22,16 @@ namespace Games.Data.Core
             _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
         }
 
-        public int IntInputHandler()
+        public int GetIntergerFromUserInput()
         {
             var pick = Console.ReadLine();
             int input;
-            bool checker = int.TryParse(pick, out input);
-            if (checker == false)
+            while (!int.TryParse(pick, out input))
             {
-                IntInputHandler();
+                Console.WriteLine("Wrong...");
+                pick = Console.ReadLine();
             }
             return input;
-
         }
 
         private void OnOutcomeEvent(object sender, OutcomeEventArgs e)
@@ -93,9 +92,9 @@ namespace Games.Data.Core
             }
         }
 
-        public void RoundSetter(int numberofrounds)
+        public int RoundSetter(int numberofrounds)
         {
-            numberofrounds = _diceGameModel.Rounds;
+            return _diceGameModel.Rounds;
         }
 
     }

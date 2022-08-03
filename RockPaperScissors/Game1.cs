@@ -9,16 +9,16 @@ namespace CoreGame
     public class Game1 : IGame1
     {
         private IDrawer _drawer;
-        private IDataService _dataService;
+        private IGameManager _gameManager;
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
         private IRockPaperScissorsModel _rockPaperScissorsModel;
 
-        public Game1(IDrawer drawer, IDataService dataService, 
+        public Game1(IDrawer drawer, IGameManager gameManager, 
             IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic,
             IRockPaperScissorsModel rockPaperScissorsModel)
         {
             _drawer = drawer;
-            _dataService = dataService;
+            _gameManager = gameManager;
             _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
             _rockPaperScissorsModel = rockPaperScissorsModel;
             _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
@@ -61,10 +61,10 @@ namespace CoreGame
             {
                 Console.WriteLine("Wrong selection given");
                 Console.WriteLine("Setting default difficulty");
-                _dataService.SetDifficulty('n');
+                _gameManager.SetDifficulty('n');
                 return;
             }
-            _dataService.SetDifficulty(picked);
+            _gameManager.SetDifficulty(picked);
         }
 
         private void GameLoop()
@@ -87,7 +87,7 @@ namespace CoreGame
                 {
                     break;
                 }
-                _dataService.PickInterpreter(selection);
+                _gameManager.PickInterpreter(selection);
 
             }
         }

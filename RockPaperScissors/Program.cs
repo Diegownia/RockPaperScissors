@@ -25,7 +25,7 @@ namespace CoreGame
             builder.RegisterType<Drawer>().As<IDrawer>();
             builder.RegisterType<ScoreCalculator>().As<IScoreCalculator>();
             builder.RegisterType<RockPaperScissorsModel>().As<IRockPaperScissorsModel>().SingleInstance();
-            builder.RegisterType<DataService>().As<IDataService>();
+            builder.RegisterType<GameManager>().As<IGameManager>();
             builder.RegisterType<RockPaperScissorsDeepLogic>().As<IRockPaperScissorsDeepLogic>().SingleInstance();
             builder.RegisterType<DiceGameModel>().As<IDiceGameModel>();
 

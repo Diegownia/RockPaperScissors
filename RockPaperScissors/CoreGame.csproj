@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DiceGame\DiceGame.csproj" />
     <ProjectReference Include="..\Games.Data.Core\Games.Data.Core.csproj" />
   </ItemGroup>
 

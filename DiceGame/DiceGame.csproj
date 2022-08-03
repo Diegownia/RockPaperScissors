@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Games.Data.Core\Games.Data.Core.csproj" />
+  </ItemGroup>
+
 </Project>
