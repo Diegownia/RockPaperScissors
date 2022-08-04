@@ -82,6 +82,7 @@ namespace CoreGame
                 Console.WriteLine("For [paper] - press 'p' ");
                 Console.WriteLine("For [scissors] - press 's' ");
                 Console.WriteLine("For [rock] - press 'r' ");
+                Console.WriteLine("If you want to quit press 'q'");
                 var selection = Console.ReadLine().ToLower();
                 if (selection == "q")
                 {

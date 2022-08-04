@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DiceGame;
+using Games.Data.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,10 +10,12 @@ namespace CoreGame
     {
         private readonly IGame1 _game1;
         private readonly IDrawer _drawer;
-        public MainMenu(IGame1 game1, IDrawer drawer)
+        private readonly IDice _dice;
+        public MainMenu(IGame1 game1, IDrawer drawer, IDice dice)
         {
             _game1  = game1;
             _drawer = drawer;
+            _dice = dice;
         }
 
         public void Welcome()
@@ -46,7 +50,7 @@ namespace CoreGame
                     Console.Clear();
                     Console.WriteLine();
                     Console.WriteLine("You've picked Dice game! Enjoy!");
-                    //To do Game 2 [dice game]
+                    _dice.DiceGame();
                     Console.Clear();
                     Console.WriteLine("Hope the game was fun");
                     Welcome();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CoreGame
+namespace Games.Data.Core
 {
     public class Drawer : IDrawer
     {
@@ -60,6 +60,21 @@ MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXl.   ...,'
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNk,     ....           
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWk;......         .,. 
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWN0dc:,,'......'o0Nk";
+            Console.WriteLine(logo);
+        }
+
+
+        public void DrawDiceIntro()
+        {
+            string logo = @"
+              _______.
+   ______    | .   . |\
+  /     /\   |   .   |.\
+ /  '  /  \  | .   . |.'|
+/_____/. . \ |_______|.'|
+\ . . \    /  \ ' .   \'|
+ \ . . \  /    \____'__\|
+  \_____\/";
             Console.WriteLine(logo);
         }
     }

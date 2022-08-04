@@ -10,16 +10,31 @@ namespace Games.Data.Core
         private IRockPaperScissorsDeepLogic _rockPaperScissorsDeepLogic;
         private IScoreCalculator _scoreCalculator;
         private IDiceGameModel _diceGameModel;
+        private IDiceSimulator _diceSimulator;
 
         public GameManager(IRockPaperScissorsModel rockPaperScissorsModel,
             IRockPaperScissorsDeepLogic rockPaperScissorsDeepLogic, 
-            IScoreCalculator scoreCalculator, IDiceGameModel diceGameModel)
+            IScoreCalculator scoreCalculator, IDiceGameModel diceGameModel,
+            IDiceSimulator diceSimulator)
         {
             _rockPaperScissorsModel = rockPaperScissorsModel;
             _rockPaperScissorsDeepLogic = rockPaperScissorsDeepLogic;
             _scoreCalculator = scoreCalculator;
             _diceGameModel = diceGameModel;
+            _diceSimulator = diceSimulator;
             _rockPaperScissorsDeepLogic.OutcomeEvent += OnOutcomeEvent;
+        }
+        //Input interpreters
+        public ConsoleKeyInfo GetEnterFromUser()
+        {
+            
+            ConsoleKeyInfo enter = Console.ReadKey();
+            while (enter.Key != ConsoleKey.Enter)
+            {
+                Console.WriteLine("Wrong key pressed...");
+                enter = Console.ReadKey();
+            }
+            return enter;
         }
 
         public int GetIntergerFromUserInput()
@@ -33,29 +48,7 @@ namespace Games.Data.Core
             }
             return input;
         }
-
-        private void OnOutcomeEvent(object sender, OutcomeEventArgs e)
-        {
-            if (e.Outcome == Outcomes.Win)
-            {
-                _rockPaperScissorsModel.Wins++;
-                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
-                    _rockPaperScissorsModel.Loses);
-            }
-            if (e.Outcome == Outcomes.Lose)
-            {
-                _rockPaperScissorsModel.Loses++;
-                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
-                    _rockPaperScissorsModel.Loses);
-            }
-            if (e.Outcome == Outcomes.Draw)
-            {
-                _rockPaperScissorsModel.Draws++;
-                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
-                    _rockPaperScissorsModel.Loses);
-            }
-        }
-
+        // Game mechanics handlers
         public void SetDifficulty(char diffinput)
         {
             if (diffinput == 'e')
@@ -92,10 +85,58 @@ namespace Games.Data.Core
             }
         }
 
-        public int RoundSetter(int numberofrounds)
+        public void RoundSetter(int numberofrounds)
         {
-            return _diceGameModel.Rounds;
+            _diceGameModel.Rounds = numberofrounds;
         }
 
+        public char DiceThrower()
+        {
+            return DiceRoundSettler(_diceSimulator.ThrowDice(), _diceSimulator.ThrowDice());
+
+        }
+        // private methods
+        private char DiceRoundSettler(int playerThrow, int pCThrow)
+        {
+            if (playerThrow > pCThrow)
+            {
+                _diceGameModel.PlayerScore++;
+                _diceGameModel.Rounds--;
+                return 'p';
+            }
+            else if (playerThrow < pCThrow)
+            {
+                _diceGameModel.PcScore++;
+                _diceGameModel.Rounds--;
+                return 'c';
+            }
+            else if (playerThrow == pCThrow)
+            {
+                _diceGameModel.Rounds--;
+                return 'd';
+            }
+            return 'x';
+        }
+        private void OnOutcomeEvent(object sender, OutcomeEventArgs e)
+        {
+            if (e.Outcome == Outcomes.Win)
+            {
+                _rockPaperScissorsModel.Wins++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+            if (e.Outcome == Outcomes.Lose)
+            {
+                _rockPaperScissorsModel.Loses++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+            if (e.Outcome == Outcomes.Draw)
+            {
+                _rockPaperScissorsModel.Draws++;
+                _scoreCalculator.CountScore(_rockPaperScissorsModel.Wins,
+                    _rockPaperScissorsModel.Loses);
+            }
+        }
     }
 }
