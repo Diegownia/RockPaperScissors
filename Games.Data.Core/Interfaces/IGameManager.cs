@@ -9,6 +9,7 @@ namespace Games.Data.Core
         int GetIntergerFromUserInput();
         void RoundSetter(int numberofrounds);
         char DiceThrower();
+        char DiceScoreCounter();
         ConsoleKeyInfo GetEnterFromUser();
     }
 }

@@ -41,9 +41,8 @@ namespace DiceGame
             }
 
             Console.WriteLine("Round is over. ");
-            Console.WriteLine($"Score is: {_diceGameModel.PlayerScore}");
+            FindWinnerOfTheRound();
             Console.WriteLine("press any key to leave!");
-            //TODO proper score caluclation for round maybe another round counter?
             Console.ReadKey();
             Console.Clear();
         }
@@ -61,8 +60,24 @@ namespace DiceGame
                 case 'd':
                     Console.WriteLine("It's a draw");
                     break;
+            }
+        }
 
-
+        private void FindWinnerOfTheRound()
+        {
+            switch (_gameManager.DiceScoreCounter())
+            {
+                case 'p':
+                    Console.WriteLine("Congratulations! You won!");
+                    Console.WriteLine($"Your score is {_diceGameModel.PlayerScore}");
+                    break;
+                case 'c':
+                    Console.WriteLine("You've lost...");
+                    Console.WriteLine($"PC Score is: {_diceGameModel.PcScore}");
+                    break;
+                case 'd':
+                    Console.WriteLine("It's a draw!");
+                    break;
             }
         }
     }

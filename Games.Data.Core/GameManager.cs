@@ -84,7 +84,24 @@ namespace Games.Data.Core
                     break;
             }
         }
-
+        public char DiceScoreCounter()
+        {
+            int player =_diceGameModel.PlayerScore;
+            int pc = _diceGameModel.PcScore;
+            if (player > pc)
+            {
+                return 'p';
+            }
+            else if (player < pc)
+            {
+                return 'c';
+            }
+            else if (player == pc)
+            {
+                return 'd';
+            }
+            return 'x';
+        }
         public void RoundSetter(int numberofrounds)
         {
             _diceGameModel.Rounds = numberofrounds;
